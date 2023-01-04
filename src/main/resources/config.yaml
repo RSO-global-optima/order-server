@@ -1,0 +1,34 @@
+kumuluzee:
+  name: order-server
+  env:
+    name: dev
+  version: 1.0.0
+  datasources:
+    - jndi-name: jdbc/OrdersDS
+      connection-url: jdbc:postgresql://localhost:5435/orders
+      username: postgres
+      password: postgres
+      pool:
+        max-size: 2
+  persistence-units:
+    - name: "team-globaloptima-order"
+      continue-on-error: false
+  openapi-mp:
+    enabled: true
+    scan:
+      packages: team.globaloptima
+    servlet:
+      mapping: /openapi
+    servers: https://example-api.com
+    ui:
+      server-auto-config:
+        enabled: true
+        original-uri-check: true
+      enabled: true
+      mapping: /openapi/ui
+    scanning:
+      debug: true
+  server:
+    base-url: http://localhost:8083
+    http:
+      port: 8083
